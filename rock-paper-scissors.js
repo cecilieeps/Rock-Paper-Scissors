@@ -6,7 +6,7 @@ function getComputerChoice() {
 
 function getPlayerChoice() {
     let playerChoice = prompt("Your weapon of choice (Rock/Paper/Scissors)? ").toLowerCase();
-    if (validSelection(playerChoice)) {
+    if (checkSelection(playerChoice)) {
         return playerChoice;
     } 
     else {
@@ -15,7 +15,7 @@ function getPlayerChoice() {
     }
 }
 
-function validSelection(playerSelection) {
+function checkSelection(playerSelection) {
     let choices = ["rock", "paper", "scissors"];
     return (choices.includes(playerSelection) ? true : false);
 }
@@ -28,12 +28,12 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "player")) {
-        return roundWinner("player");
+        return setRoundWinner("player");
     } 
-    else {return roundWinner("computer");}
+    else {return setRoundWinner("computer");}
 }
 
-function roundWinner(player) {
+function setRoundWinner(player) {
     return player;
 }
 
