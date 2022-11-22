@@ -1,3 +1,12 @@
+/**
+ * This program plays a game of Rock Paper Scissors. One game consists of five rounds. 
+ * At the beginning of each round the player is prompted to make a choice which once typed
+ * is checked. If the choice is not valid, an alert is shown and the player is prompted
+ * with the same question as before. 
+ * A round which results in a draw is counted but no points are rewarded. 
+ * 
+ * @author Cecilie Sande <cecilieeps>
+ */
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
     let i = Math.floor(Math.random() * 3);
