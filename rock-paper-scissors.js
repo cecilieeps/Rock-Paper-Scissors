@@ -4,25 +4,15 @@ const scissorsBtn = document.querySelector('#scissors-btn');
 const scoreContainer = document.querySelector('#score-container');
 const healthContainer = document.getElementById('health-container');
 
-// Initializes health visuals
-for (let i = 0; i < 5; i++) {
-    const heartIcon = document.createElement('img');
-    heartIcon.setAttribute('src', './images/heart.png');
-    document.getElementById('health-container').appendChild(heartIcon);
-}
-
-// Have a function which removes a health heart when the opposite
-// player wins. 
-
 // Create a message that pops up when someone has won
-const winnerMessage = document.querySelector('div');
+const gameOver = document.container('div');
 
-let enemyHP = 0;
-let playerHP = 0;
+let enemyLives = 5;
+let playerLives = 5;
 
 function checkScore() {
-    if (enemyHP === 5 || playerHP === 5) {
-        return declareWinner(playerHP, enemyHP);
+    if (enemyLives === 0 || playerLives === 0) {
+        return declareWinner(playerLives, enemyLives);
     }
 }
 
@@ -50,31 +40,40 @@ function playRound(playerSelection, enemySelection) {
         (playerSelection === "rock" && enemySelection === "scissors") ||
         (playerSelection === "paper" && enemySelection === "rock") ||
         (playerSelection === "scissors" && enemySelection === "player")) {
-        playerHP++;
-        player.textContent = `Player: ${playerHP}`;
+        enemyLives--;
     } 
     else {
-        enemyHP++;
-        comp.textContent = `Computer: ${enemyHP}`;
+        playerLives--;
+        console.log(playerLives);
+        // Function removes a heart from health gauge
+        if (healthContainer.hasChildNodes()) {
+            healthContainer.removeChild(healthContainer.children[playerLives]);
+        }
+        else {healthContainer.removeFirstChild();}
     }
     checkScore();
 }
 
-function declareWinner(playerHP, enemyHP) {
-    if (playerHP > enemyHP) {
-        console.log(`${playerHP}`);
-        console.log(`Player wins by ${playerHP - enemyHP} points!`)
+function declareWinner(playerLives, enemyLives) {
+    if (playerLives > enemyLives) {
+        console.log(`${playerLives}`);
+        console.log(`Player wins by ${playerLives - enemyLives} points!`)
     } 
-    else if (playerHP < enemyHP) {
-        console.log(`${playerHP}`);
-        console.log(`Computer wins by ${enemyHP - playerHP} points!`)
+    else if (playerLives < enemyLives) {
+        console.log(`${playerLives}`);
+        console.log(`Computer wins by ${enemyLives - playerLives} points!`)
     } 
     else {console.log(`It's a draw!`)}
-    resetScore();
+    resetHealth();
 }
 
-function resetScore() {
-    enemyHP = 0;
-    playerHP = 0;
-    player.textContent = 'Your health: 0'
+function resetHealth() {
+    enemyLives = 5;
+    playerLives = 5;
+    // Initializes health visuals
+    for (let i = 0; i < 5; i++) {
+        const heartIcon = document.createElement('img');
+        heartIcon.setAttribute('src', './images/heart.png');
+        healthContainer.appendChild(heartIcon);
+    }
 }
