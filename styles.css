@@ -42,15 +42,6 @@ button img {
     display: block;
 }
 
-#score {
-    display: flex;
-    justify-content: center;
-}
-
-.score {
-    padding: 2em;
-}
-
 .buttons-container {
     display: flex;
     justify-content: center;
@@ -74,6 +65,20 @@ h1 {
     text-align: center;
 }
 
+#game-over {
+    color: white
+}
+
+#health-potion-btn {
+    height: 60px;
+    width: 60px;
+    background-color: green;
+    visibility: hidden;
+}
+
+#decline-potion-btn {
+    visibility: hidden;
+}
 
 
 

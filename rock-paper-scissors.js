@@ -1,18 +1,45 @@
-const rockBtn = document.querySelector('#rock-btn');
-const paperBtn = document.querySelector('#paper-btn');
-const scissorsBtn = document.querySelector('#scissors-btn');
-const scoreContainer = document.querySelector('#score-container');
+const container = document.getElementById('container');
+const rockBtn = document.getElementById('rock-btn');
+const paperBtn = document.getElementById('paper-btn');
+const scissorsBtn = document.getElementById('scissors-btn');
+const scoreContainer = document.getElementById('score-container');
 const healthContainer = document.getElementById('health-container');
 
-// Create a message that pops up when someone has won
-const gameOver = document.container('div');
+const gameOver = document.createElement('div');
+document.querySelector('body').appendChild(gameOver);
+
+const gameOverMessage = document.createElement('p');
+gameOver.appendChild(gameOverMessage);
+
+gameOverMessage.setAttribute('id', 'game-over-msg');
+gameOverMessage.textContent = '';
+
+const healthPotionBtn = document.createElement('button');
+healthPotionBtn.setAttribute('id', 'health-potion-btn');
+gameOver.appendChild(healthPotionBtn);
+
+const declinePotionBtn = document.createElement('button');
+declinePotionBtn.setAttribute('id', 'decline-potion-btn');
+gameOver.appendChild(declinePotionBtn);
 
 let enemyLives = 5;
 let playerLives = 5;
+let numOfRounds = 0;
+resetHealth();
 
-function checkScore() {
+function checkHealth() {
     if (enemyLives === 0 || playerLives === 0) {
-        return declareWinner(playerLives, enemyLives);
+        if (numOfRounds === 1){
+            return declareWinner(playerLives, enemyLives);
+        }
+        else {
+            gameOverMessage.textContent = 
+            'Feeling faint you desperately search your satchel for something useful. You \
+            clench your fingers around something cold and spherelike, and realize you have \
+            a health potion. \nWould you like to drink it?';
+            // Add a keyEventListener for a click on potion bottle
+            healthPotionBtn.addEventListener('click', resetHealth());
+        }
     }
 }
 
@@ -51,7 +78,7 @@ function playRound(playerSelection, enemySelection) {
         }
         else {healthContainer.removeFirstChild();}
     }
-    checkScore();
+    checkHealth();
 }
 
 function declareWinner(playerLives, enemyLives) {
