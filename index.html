@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
-        <meta charset="utf-8">;
-        <title></title>
+        <meta charset="utf-8">
+        <script src="rock-paper-scissors.js" defer></script>
+        <title>Rock Paper Scissors</title>
+        <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
     </head>
     <body>
-        <script src="rock-paper-scissors.js"></script>
+        <link rel="stylesheet" href="styles.css">
+        <div id="container">
+            <h1>Rock Scroll Dagger</h1>
+            <p>"The sun has just retreated and the cold November air begins covering the 
+                woods with frost as you make your way back home. You feel a sudden chill 
+                down your spine and can't help but wonder if there is something lurking 
+                deep within the woods.
+                And then you see it. Green glowing eyes and a glint of something you can't
+                quite make out. You weren't prepared for this. All your satchel holds is 
+                a peculiar looking stone, a scroll with illegible writing you stumbled 
+                across earlier and ah... yes... a dagger!"
+            </p>
+            <p>Select your weapon of choice:</p>
+            <div class="buttons-container">
+                <button id="rock-btn" class="game-button">
+                    <img src="./images/pixel-rock.png.crdownload">
+                    <img class="sparkle-overlay" src="./images/pixel-sparkle.gif">
+                </button>
+                <button id="paper-btn" class="game-button">
+                    <img src="./images/pixel-scroll.png.crdownload">
+                    <img class="sparkle-overlay" src="./images/pixel-sparkle.gif">
+                </button>
+                <button id="scissors-btn" class="game-button">
+                    <img src="./images/pixel-dagger.png">
+                    <img class="sparkle-overlay" src="./images/pixel-sparkle.gif">
+                </button>
+            </div>
+            <div id="health-container">
+                <p>Your health: </p>
+            </div>
+        </div>
     </body>
 </html>

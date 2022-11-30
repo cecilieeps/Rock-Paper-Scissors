@@ -1,0 +1,80 @@
+body {
+    background-color: #000;
+    font-family: 'Aclonica';
+    color: whitesmoke; 
+}
+
+.buttons-container button {
+    position: relative;
+    background: transparent;
+    border-radius: 10px;
+    font-size: 24px;
+    padding: 32px 16px;
+    border: none;
+    opacity: 0.3;
+    margin: 30px;
+    width: 100px;
+}
+
+button img {
+    height: 100px;
+    width: auto;
+}
+
+.buttons-container button:hover  {
+    opacity: 1;
+}
+
+.game-button .sparkle-overlay {
+    position: absolute;
+    top: 20px;
+    left: 6px;
+    width: 130px;
+    height: auto;
+    display: none;
+    color: #FFF;
+}
+
+/* When a button is hovered over, we want to display the contents (our sparkle gif)
+ in the .sparkle-overlay class.
+*/
+.buttons-container button:hover .sparkle-overlay {
+    display: block;
+}
+
+#score {
+    display: flex;
+    justify-content: center;
+}
+
+.score {
+    padding: 2em;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    background-color: #000;
+    color: whitesmoke;
+    border-radius: 14px;
+    margin: 200px auto;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    padding: 15px;
+    font-family: 'Aclonica';
+    font-size: 40px;
+    text-align: center;
+}
+
+
+
+
+

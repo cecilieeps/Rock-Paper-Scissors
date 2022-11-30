@@ -1,81 +1,80 @@
-/**
- * This program plays a game of Rock Paper Scissors. One game consists of five rounds. 
- * At the beginning of each round the player is prompted to make a choice which once typed
- * is checked. If the choice is not valid, an alert is shown and the player is prompted
- * with the same question as before. 
- * A round which results in a draw is counted but no points are rewarded. 
- * 
- * @author Cecilie Sande <cecilieeps>
- */
-function getComputerChoice() {
+const rockBtn = document.querySelector('#rock-btn');
+const paperBtn = document.querySelector('#paper-btn');
+const scissorsBtn = document.querySelector('#scissors-btn');
+const scoreContainer = document.querySelector('#score-container');
+const healthContainer = document.getElementById('health-container');
+
+// Initializes health visuals
+for (let i = 0; i < 5; i++) {
+    const heartIcon = document.createElement('img');
+    heartIcon.setAttribute('src', './images/heart.png');
+    document.getElementById('health-container').appendChild(heartIcon);
+}
+
+// Have a function which removes a health heart when the opposite
+// player wins. 
+
+// Create a message that pops up when someone has won
+const winnerMessage = document.querySelector('div');
+
+let enemyHP = 0;
+let playerHP = 0;
+
+function checkScore() {
+    if (enemyHP === 5 || playerHP === 5) {
+        return declareWinner(playerHP, enemyHP);
+    }
+}
+
+rockBtn.addEventListener('click', () => {
+    playRound("rock", getEnemyChoice());
+});
+
+paperBtn.addEventListener('click', () => {
+    playRound("paper", getEnemyChoice());
+});
+
+scissorsBtn.addEventListener('click', () => {
+    playRound("scissors", getEnemyChoice());
+});
+
+function getEnemyChoice() {
     let choices = ["rock", "paper", "scissors"];
     let i = Math.floor(Math.random() * 3);
     return choices[i];
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt("Your weapon of choice (Rock/Paper/Scissors)? ").toLowerCase();
-    if (checkSelection(playerChoice)) {
-        return playerChoice;
+function playRound(playerSelection, enemySelection) {
+    if (playerSelection === enemySelection) {}
+    else if (
+        (playerSelection === "rock" && enemySelection === "scissors") ||
+        (playerSelection === "paper" && enemySelection === "rock") ||
+        (playerSelection === "scissors" && enemySelection === "player")) {
+        playerHP++;
+        player.textContent = `Player: ${playerHP}`;
     } 
     else {
-        alert("Oops! That weapon requires a higher level! Try again... ")
-        getPlayerChoice();
+        enemyHP++;
+        comp.textContent = `Computer: ${enemyHP}`;
     }
+    checkScore();
 }
 
-function checkSelection(playerSelection) {
-    let choices = ["rock", "paper", "scissors"];
-    return (choices.includes(playerSelection) ? true : false);
-}
-
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return null;
+function declareWinner(playerHP, enemyHP) {
+    if (playerHP > enemyHP) {
+        console.log(`${playerHP}`);
+        console.log(`Player wins by ${playerHP - enemyHP} points!`)
     } 
-    else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "paper" && computerSelection === "rock") ||
-        (playerSelection === "scissors" && computerSelection === "player")) {
-        return setRoundWinner("player");
-    } 
-    else {return setRoundWinner("computer");}
-}
-
-function setRoundWinner(player) {
-    return player;
-}
-
-function declareWinner(playerScore, computerScore) {
-    if (playerScore > computerScore) {
-        console.log(`Player wins by ${playerScore - computerScore} points!`)
-    } 
-    else if (playerScore < computerScore) {
-        console.log(`Computer wins by ${computerScore - playerScore} points!`)
+    else if (playerHP < enemyHP) {
+        console.log(`${playerHP}`);
+        console.log(`Computer wins by ${enemyHP - playerHP} points!`)
     } 
     else {console.log(`It's a draw!`)}
+    resetScore();
 }
 
-function game() {
-    let computerScore = 0;
-    let playerScore = 0;
-    for (let round = 1; round <= 5; round++) {
-        console.log(`ROUND ${round}...`);
-        let computerChoice = getComputerChoice();
-        let playerChoice = getPlayerChoice();
-        let roundResult = playRound(playerChoice, computerChoice);
-        if (roundResult === "player") {
-            console.log(`You chose ${playerChoice}! You win this round!`);
-            playerScore++;
-        } 
-        else if (roundResult === "computer") {
-            console.log(`Computer chose ${computerChoice}! Computer wins this round!`);
-            computerScore++;
-        } 
-        else {console.log("It's a draw!");}
-        console.log(`Player: ${playerScore} \nComputer: ${computerScore}`);
-    }
-    declareWinner(playerScore, computerScore);
+function resetScore() {
+    enemyHP = 0;
+    playerHP = 0;
+    player.textContent = 'Your health: 0'
 }
-
-game();
