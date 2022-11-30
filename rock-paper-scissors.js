@@ -7,6 +7,7 @@ const healthContainer = document.getElementById('health-container');
 
 const gameOver = document.createElement('div');
 document.querySelector('body').appendChild(gameOver);
+gameOver.setAttribute('id', 'game-over-container');
 
 const gameOverMessage = document.createElement('p');
 gameOver.appendChild(gameOverMessage);
@@ -28,19 +29,32 @@ let numOfRounds = 0;
 resetHealth();
 
 function checkHealth() {
-    if (enemyLives === 0 || playerLives === 0) {
-        if (numOfRounds === 1){
-            return declareWinner(playerLives, enemyLives);
-        }
-        else {
-            gameOverMessage.textContent = 
-            'Feeling faint you desperately search your satchel for something useful. You \
-            clench your fingers around something cold and spherelike, and realize you have \
-            a health potion. \nWould you like to drink it?';
-            // Add a keyEventListener for a click on potion bottle
-            healthPotionBtn.addEventListener('click', resetHealth());
-        }
+    if ((enemyLives === 0 || playerLives === 0) && numOfRounds === 1) {
+        declareWinner(playerLives, enemyLives);
     }
+    else if (playerLives === 1){
+        offerHealthPotion();
+    }
+}
+
+function offerHealthPotion() {
+    container.style.display = 'none';
+    gameOverMessage.textContent = 
+        'Feeling faint you desperately search your satchel for something useful. You \
+        clench your fingers around something cold and spherelike, and realize you have \
+        a health potion. \nWould you like to drink it?';
+
+    /* call a function which then re-sets the page back to normal but without the 
+    intro text.
+    */
+    healthPotionBtn.addEventListener('click', () => {
+        container.style.display = 'visible';
+        document.getElementById('intro-text').style.display = 'none';
+        resetHealth();
+    });
+
+    declinePotionBtn.addEventListener('click', playRound())
+
 }
 
 rockBtn.addEventListener('click', () => {
@@ -72,7 +86,7 @@ function playRound(playerSelection, enemySelection) {
     else {
         playerLives--;
         console.log(playerLives);
-        // Function removes a heart from health gauge
+        // Removes a heart from health gauge
         if (healthContainer.hasChildNodes()) {
             healthContainer.removeChild(healthContainer.children[playerLives]);
         }

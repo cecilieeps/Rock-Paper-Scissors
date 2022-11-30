@@ -1,5 +1,6 @@
 body {
-    background-color: #000;
+    background-image: url('./images/woods.jpg');
+    background-size: auto 100%;
     font-family: 'Aclonica';
     color: whitesmoke; 
 }
@@ -35,9 +36,6 @@ button img {
     color: #FFF;
 }
 
-/* When a button is hovered over, we want to display the contents (our sparkle gif)
- in the .sparkle-overlay class.
-*/
 .buttons-container button:hover .sparkle-overlay {
     display: block;
 }
@@ -48,7 +46,7 @@ button img {
 }
 
 #container {
-    background-color: #000;
+    background: transparent;
     color: whitesmoke;
     border-radius: 14px;
     margin: 200px auto;
@@ -56,6 +54,7 @@ button img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 }
 
 h1 {
@@ -65,8 +64,11 @@ h1 {
     text-align: center;
 }
 
-#game-over {
-    color: white
+#game-over-container {
+    font-family: 'Aclonica';
+    color: whitesmoke;
+    margin: 200px auto;
+    max-width: 700px;
 }
 
 #health-potion-btn {
