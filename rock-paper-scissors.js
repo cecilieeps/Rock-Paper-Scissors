@@ -18,7 +18,7 @@ healthPotionBtn.style.display = 'none';
 resetHealth();
 
 healthPotionBtn.addEventListener('click', () => {
-    document.getElementById('potion-text').style.display = 'none';
+    document.getElementById('potion-text').style.opacity = 0.3;
     healthPotionBtn.style.display = 'none';
     healthContainer.innerHTML = '';
     resetHealth();
@@ -81,7 +81,7 @@ function checkLives() {
 }
 
 function offerHealthPotion() {
-    document.getElementById('intro-text').style.display = 'none';
+    document.getElementById('intro-text').style.opacity = 0.3;
     document.getElementById('potion-text').style.display = 'block';
     healthPotionBtn.style.display = 'block';
 }
@@ -106,7 +106,7 @@ function resetHealth() {
     // Initializes health visuals
     for (let i = 0; i < 5; i++) {
         const heartIcon = document.createElement('img');
-        heartIcon.setAttribute('src', './images/heart.png');
+        heartIcon.setAttribute('src', './images/healthheart.png');
         healthContainer.appendChild(heartIcon);
     }
 }

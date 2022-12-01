@@ -15,7 +15,7 @@ body {
 }
 
 button img {
-    height: 100px;
+    height: 150px;
     width: auto;
 }
 
@@ -25,9 +25,9 @@ button img {
 
 .game-button .sparkle-overlay {
     position: absolute;
-    top: 20px;
-    left: 6px;
-    width: 130px;
+    top: 10px;
+    left: -15px;
+    width: 220px;
     height: auto;
     display: none;
     color: #FFF;
@@ -37,11 +37,6 @@ button img {
     display: block;
 }
 
-.buttons-container {
-    display: flex;
-    justify-content: center;
-}
-
 #container {
     font-family: 'Aclonica';
     background-image: url('./images/woods.jpg');
@@ -49,12 +44,12 @@ button img {
     border-radius: 15px;
     color: whitesmoke;
     margin: 100px auto;
-    width: 800px;
-    height: 900px;
+    width: 900px;
+    height: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
+    padding: 30px;
 }
 
 h1 {
@@ -69,6 +64,13 @@ h1 {
     height: 60px;
     width: 60px;
     background-color: transparent;
+}
+
+#health-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
