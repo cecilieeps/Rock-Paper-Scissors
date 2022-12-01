@@ -53,18 +53,7 @@ function getEnemyChoice() {
 
 function playRound(playerSelection, enemySelection) {
     if (playerSelection === enemySelection) {}
-
-    if (playerLives === 0 || enemyLives === 0) {
-        declareWinner(playerLives, enemyLives);
-    }
-
-    if (gamesPlayed === 0 && playerLives === 1) {
-        console.log(`playerLives = ${playerLives}`);
-        gamesPlayed ++;
-        return offerHealthPotion();
-    }
-    if (
-        (playerSelection === "rock" && enemySelection === "scissors") ||
+    if ((playerSelection === "rock" && enemySelection === "scissors") ||
         (playerSelection === "paper" && enemySelection === "rock") ||
         (playerSelection === "scissors" && enemySelection === "player")) {
         enemyLives--;
@@ -76,6 +65,18 @@ function playRound(playerSelection, enemySelection) {
             healthContainer.removeChild(healthContainer.children[playerLives]);
         }
         else {healthContainer.removeFirstChild();}
+    }
+    checkLives()
+}
+
+function checkLives() {
+    if (playerLives === 0 || enemyLives === 0) {
+        declareWinner(playerLives, enemyLives);
+    }
+    if (gamesPlayed === 0 && playerLives === 1) {
+        console.log(`playerLives = ${playerLives}`);
+        gamesPlayed ++;
+        return offerHealthPotion();
     }
 }
 
