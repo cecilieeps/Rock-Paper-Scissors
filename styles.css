@@ -1,6 +1,5 @@
 body {
-    background-image: url('./images/woods.jpg');
-    background-attachment: fixed;
+    background: url('./images/woods.jpg') center center no-repeat;
 }
 
 .buttons-container button {
