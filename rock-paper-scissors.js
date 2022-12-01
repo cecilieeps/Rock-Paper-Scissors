@@ -10,7 +10,12 @@ let enemyLives = 5;
 let playerLives = 5;
 let gamesPlayed = 0;
 
-document.getElementById('potion-text').style.display = 'none';
+// create a reset button
+
+
+const potionText = document.getElementById('potion-text');
+potionText.style.visibility = 'hidden';
+
 document.getElementById('player-wins').style.display = 'none';
 document.getElementById('enemy-wins').style.display = 'none';
 healthPotionBtn.style.display = 'none';
@@ -25,22 +30,31 @@ healthPotionBtn.addEventListener('click', () => {
     });
 
 rockBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'block') {
+    if (healthPotionBtn.style.display === 'inline-block') {
         healthPotionBtn.style.display = 'none';
+    }
+    if (potionText.style.visibility === 'visible') {
+        potionText.style.opacity = 0.3;
     }
     playRound("rock", getEnemyChoice());
     });
 
 paperBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'block') {
+    if (healthPotionBtn.style.display === 'inline-block') {
         healthPotionBtn.style.display = 'none';
+    }
+    if (potionText.style.visibility === 'visible') {
+        potionText.style.opacity = 0.3;
     }
     playRound("paper", getEnemyChoice());
     });
 
 scissorsBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'block') {
+    if (healthPotionBtn.style.display === 'inline-block') {
         healthPotionBtn.style.display = 'none';
+    }
+    if (potionText.style.visibility === 'visible') {
+        potionText.style.opacity = 0.3;
     }
     playRound("scissors", getEnemyChoice());
     });
@@ -53,7 +67,7 @@ function getEnemyChoice() {
 
 function playRound(playerSelection, enemySelection) {
     if (playerSelection === enemySelection) {}
-    if ((playerSelection === "rock" && enemySelection === "scissors") ||
+    else if ((playerSelection === "rock" && enemySelection === "scissors") ||
         (playerSelection === "paper" && enemySelection === "rock") ||
         (playerSelection === "scissors" && enemySelection === "player")) {
         enemyLives--;
@@ -66,7 +80,9 @@ function playRound(playerSelection, enemySelection) {
         }
         else {healthContainer.removeFirstChild();}
     }
-    checkLives()
+    console.log(`player chose : ${playerSelection}`);
+    console.log(`enemy chose : ${enemySelection}`);
+    checkLives();
 }
 
 function checkLives() {
@@ -76,20 +92,19 @@ function checkLives() {
     if (gamesPlayed === 0 && playerLives === 1) {
         console.log(`playerLives = ${playerLives}`);
         gamesPlayed ++;
-        return offerHealthPotion();
+        offerHealthPotion();
     }
 }
 
 function offerHealthPotion() {
     document.getElementById('intro-text').style.opacity = 0.3;
-    document.getElementById('potion-text').style.display = 'block';
-    healthPotionBtn.style.display = 'block';
+    document.getElementById('potion-text').style.visibility = 'visible';
+    healthPotionBtn.style.display = 'inline-block';
 }
 
 function declareWinner(playerLives, enemyLives) {
-    document.getElementById('potion-text').style.display = 'none';
-    document.getElementById('ask').style.display = 'none';
-    document.querySelector('.buttons-container').style.display = 'none';
+    document.querySelector('.buttons-heading').style.visibility = 'hidden';
+    document.querySelector('.buttons-container > .game-button').style.display = 'none';
     document.getElementById('health-container').style.display = 'none';
     if (playerLives > enemyLives) {
         document.getElementById('player-wins').style.display = 'block';
@@ -109,4 +124,14 @@ function resetHealth() {
         heartIcon.setAttribute('src', './images/healthheart.png');
         healthContainer.appendChild(heartIcon);
     }
+}
+
+// When a game finishes all our text is visible on the screen
+// Re-set visibility and re-set player and enemy health
+function resetGame() {
+    resetHealth();
+    document.getElementById('intro-text').style.opacity = 1;
+    potionText.style.visibility = 'hidden';
+    document.querySelector('.buttons-heading').style.visibility = 'visible';
+    
 }

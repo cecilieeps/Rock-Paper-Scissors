@@ -1,5 +1,6 @@
 body {
-    background-color: black;
+    background-image: url('./images/woods.jpg');
+    background-size: cover;
 }
 
 .buttons-container button {
@@ -7,11 +8,18 @@ body {
     background: transparent;
     border-radius: 10px;
     font-size: 24px;
-    padding: 32px 16px;
     border: none;
-    opacity: 0.3;
-    margin: 30px;
+    opacity: 0.5;
+    margin: 50px;
     width: 100px;
+    height: auto;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 button img {
@@ -25,12 +33,11 @@ button img {
 
 .game-button .sparkle-overlay {
     position: absolute;
-    top: 10px;
-    left: -15px;
-    width: 220px;
+    top: -40px;
+    left: -55px;
+    width: 250px;
     height: auto;
     display: none;
-    color: #FFF;
 }
 
 .buttons-container button:hover .sparkle-overlay {
@@ -39,9 +46,7 @@ button img {
 
 #container {
     font-family: 'Aclonica';
-    background-image: url('./images/woods.jpg');
     background-size: cover;
-    border-radius: 15px;
     color: whitesmoke;
     margin: 100px auto;
     width: 900px;
