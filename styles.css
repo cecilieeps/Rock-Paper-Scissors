@@ -1,5 +1,6 @@
 body {
-    background: url('./images/woods.jpg') center center no-repeat;
+    background: url('./images/woods.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .buttons-container button {
@@ -45,9 +46,8 @@ button img {
 
 #container {
     font-family: 'Aclonica';
-    background-size: cover;
     color: whitesmoke;
-    margin: 100px auto;
+    margin: 50px auto;
     width: 900px;
     height: 900px;
     display: flex;
@@ -57,17 +57,10 @@ button img {
 }
 
 h1 {
-    padding: 15px;
+    padding: 10px;
     font-family: 'Aclonica';
     font-size: 40px;
     text-align: center;
-}
-
-
-#health-potion-btn {
-    height: 60px;
-    width: 60px;
-    background-color: transparent;
 }
 
 #health-container {
