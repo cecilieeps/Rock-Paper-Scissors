@@ -1,6 +1,7 @@
 body {
     background-image: url('./images/woods.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .buttons-container button {
