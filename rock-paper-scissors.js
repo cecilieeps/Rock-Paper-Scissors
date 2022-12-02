@@ -3,31 +3,32 @@ const rockBtn = document.getElementById('rock-btn');
 const paperBtn = document.getElementById('paper-btn');
 const scissorsBtn = document.getElementById('scissors-btn');
 const scoreContainer = document.getElementById('score-container');
-const healthContainer = document.getElementById('health-hearts');
+const healthContainer = document.getElementById('health-container');
 const healthPotionBtn = document.getElementById('health-potion-btn');
+const potionText = document.getElementById('potion-text');
+const healedText = document.getElementById('healed-text');
+const endOfRoundText = document.getElementById('round-end-text');
+const healthHearts = document.getElementById('health-hearts');
+const gameOverMessage = document.getElementById('game-over-message');
+const enemyEyes = document.getElementById('enemy-eyes');
+
+endOfRoundText.textContent = '';
+
+potionText.style.visibility = 'hidden';
+healedText.style.visibility = 'hidden';
+enemyEyes.style.visibility = 'hidden';
+healthPotionBtn.style.display = 'none';
 
 let enemyLives = 5;
 let playerLives = 5;
 let gamesPlayed = 0;
 
-// create a reset button
-
-
-const potionText = document.getElementById('potion-text');
-potionText.style.visibility = 'hidden';
-
-const enemyChooses = document.getElementById('enemy-choice');
-
-document.getElementById('player-wins').style.display = 'none';
-document.getElementById('enemy-wins').style.display = 'none';
-healthPotionBtn.style.display = 'none';
-
 resetHealth();
 
 healthPotionBtn.addEventListener('click', () => {
     document.getElementById('potion-text').style.opacity = 0.3;
+    healedText.style.visibility = 'visible';
     healthPotionBtn.style.display = 'none';
-    healthContainer.innerHTML = '';
     resetHealth();
     });
 
@@ -35,46 +36,80 @@ rockBtn.addEventListener('click', () => {
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
-    playRound("rock", getEnemyChoice());
+    if (healedText.style.visibility === 'visible') {
+        healedText.style.opacity = 0.3;
+    }
+    playRound('rock', getEnemyChoice());
     });
 
 paperBtn.addEventListener('click', () => {
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
-    playRound("paper", getEnemyChoice());
+    if (healedText.style.visibility === 'visible') {
+        healedText.style.opacity = 0.3;
+    }
+    playRound('paper', getEnemyChoice());
     });
 
 scissorsBtn.addEventListener('click', () => {
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
-    playRound("scissors", getEnemyChoice());
+    if (healedText.style.visibility === 'visible') {
+        healedText.style.opacity = 0.3;
+    }
+    playRound('scissors', getEnemyChoice());
     });
 
 function getEnemyChoice() {
-    let choices = ["rock", "paper", "scissors"];
+    let choices = ['rock', 'paper', 'scissors'];
     let i = Math.floor(Math.random() * 3);
     return choices[i];
 }
 
 function playRound(playerSelection, enemySelection) {
-    if (playerSelection === enemySelection) {}
-    else if ((playerSelection === "rock" && enemySelection === "scissors") ||
-        (playerSelection === "paper" && enemySelection === "rock") ||
-        (playerSelection === "scissors" && enemySelection === "player")) {
-        enemyLives--;
-    } 
-    else {
-        playerLives--;
-        // Removes a heart from health gauge
-        if (healthContainer.hasChildNodes()) {
-            healthContainer.removeChild(healthContainer.children[playerLives]);
-        }
-        else {healthContainer.removeFirstChild();}
+    switch (playerSelection) {
+        case 'rock':
+            if (enemySelection === 'scissors'){
+                enemyLives--;
+            }
+            if (enemySelection === 'paper') {
+                playerLives--;
+                removeHealth();
+            }
+            break;
+        case 'paper':
+            if (enemySelection === 'rock'){
+                enemyLives--;
+            }
+            if (enemySelection === 'scissors') {
+                playerLives--;
+                removeHealth();
+            }
+            break;
+        case 'scissors':
+            if (enemySelection === 'rock'){
+                enemyLives--;
+            }
+            if (enemySelection === 'scissors') {
+                playerLives--;
+                removeHealth();
+            }
+            break;
+        default:
+            endOfRoundText.textContent=`It's a draw!`;
     }
-    enemyChooses.textContent=`The enemy uses ${enemySelection}!`;
+    endOfRoundText.textContent=`The enemy uses ${enemySelection}!`;
+    enemyEyes.style.visibility = 'visible';
     checkLives();
+}
+
+function removeHealth() {
+    if (healthHearts.hasChildNodes()) {
+        healthHearts.removeChild(healthHearts.children[playerLives]);
+    }
+    else {healthHearts.removeFirstChild();}
 }
 
 function checkLives() {
@@ -98,16 +133,20 @@ function declareWinner(playerLives, enemyLives) {
     document.querySelector('.buttons-heading').style.visibility = 'hidden';
     document.querySelector('.buttons-container').style.display = 'none';
     document.getElementById('health-container').style.display = 'none';
-    enemyChooses.style.visibility = 'hidden';
+    endOfRoundText.style.visibility = 'hidden';
+    enemyEyes.style.visibility = 'hidden';
     if (playerLives > enemyLives) {
-        document.getElementById('player-wins').style.display = 'block';
+        gameOverMessage.textContent = 'You win!';
     } 
     else if (playerLives < enemyLives) {
-        document.getElementById('enemy-wins').style.display = 'block';
+        gameOverMessage.textContent = 'Oh no ... something dark reaches from beyond the woods...';
     } 
-    else {console.log(`It's a draw!`)}
+    else {
+        gameOverMessage.textContent = '\'Ahh... it appears we have a draw\'';
+    }
 }
 
+// Resets global variables and health visuals
 function resetHealth() {
     enemyLives = 5;
     playerLives = 5;
@@ -115,7 +154,7 @@ function resetHealth() {
     for (let i = 0; i < 5; i++) {
         const heartIcon = document.createElement('img');
         heartIcon.setAttribute('src', './images/healthheart.png');
-        healthContainer.appendChild(heartIcon);
+        healthHearts.appendChild(heartIcon);
     }
 }
 
@@ -126,5 +165,4 @@ function resetGame() {
     document.getElementById('intro-text').style.opacity = 1;
     potionText.style.visibility = 'hidden';
     document.querySelector('.buttons-heading').style.visibility = 'visible';
-    
 }
