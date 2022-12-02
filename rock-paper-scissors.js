@@ -11,8 +11,7 @@ const endOfRoundText = document.getElementById('round-end-text');
 const healthHearts = document.getElementById('health-hearts');
 const gameOverMessage = document.getElementById('game-over-message');
 const enemyEyes = document.getElementById('enemy-eyes');
-
-endOfRoundText.textContent = '';
+const divider = document.getElementById('divider');
 
 potionText.style.visibility = 'hidden';
 healedText.style.visibility = 'hidden';
@@ -134,7 +133,11 @@ function declareWinner(playerLives, enemyLives) {
     document.querySelector('.buttons-container').style.display = 'none';
     document.getElementById('health-container').style.display = 'none';
     endOfRoundText.style.visibility = 'hidden';
-    enemyEyes.style.visibility = 'hidden';
+    enemyEyes.style.display = 'none';
+    divider.style.display = 'none';
+    if (document.getElementById('intro-text').style.opacity === 1) {
+        document.getElementById('intro-text').style.opacity = 0.3;
+    }
     if (playerLives > enemyLives) {
         gameOverMessage.textContent = 'You win!';
     } 
