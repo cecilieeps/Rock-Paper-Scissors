@@ -16,6 +16,8 @@ let gamesPlayed = 0;
 const potionText = document.getElementById('potion-text');
 potionText.style.visibility = 'hidden';
 
+const enemyChooses = document.getElementById('enemy-choice');
+
 document.getElementById('player-wins').style.display = 'none';
 document.getElementById('enemy-wins').style.display = 'none';
 healthPotionBtn.style.display = 'none';
@@ -30,9 +32,6 @@ healthPotionBtn.addEventListener('click', () => {
     });
 
 rockBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'inline-block') {
-        healthPotionBtn.style.display = 'none';
-    }
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
@@ -40,9 +39,6 @@ rockBtn.addEventListener('click', () => {
     });
 
 paperBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'inline-block') {
-        healthPotionBtn.style.display = 'none';
-    }
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
@@ -50,9 +46,6 @@ paperBtn.addEventListener('click', () => {
     });
 
 scissorsBtn.addEventListener('click', () => {
-    if (healthPotionBtn.style.display === 'inline-block') {
-        healthPotionBtn.style.display = 'none';
-    }
     if (potionText.style.visibility === 'visible') {
         potionText.style.opacity = 0.3;
     }
@@ -80,8 +73,7 @@ function playRound(playerSelection, enemySelection) {
         }
         else {healthContainer.removeFirstChild();}
     }
-    console.log(`player chose : ${playerSelection}`);
-    console.log(`enemy chose : ${enemySelection}`);
+    enemyChooses.textContent=`The enemy uses ${enemySelection}!`;
     checkLives();
 }
 
@@ -104,8 +96,9 @@ function offerHealthPotion() {
 
 function declareWinner(playerLives, enemyLives) {
     document.querySelector('.buttons-heading').style.visibility = 'hidden';
-    document.querySelector('.buttons-container > .game-button').style.display = 'none';
+    document.querySelector('.buttons-container').style.display = 'none';
     document.getElementById('health-container').style.display = 'none';
+    enemyChooses.style.visibility = 'hidden';
     if (playerLives > enemyLives) {
         document.getElementById('player-wins').style.display = 'block';
     } 
