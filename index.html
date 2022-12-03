@@ -3,37 +3,37 @@
     <head>
         <meta charset="utf-8">
         <script src="rock-paper-scissors.js" defer></script>
-        <title>Rock Paper Scissors</title>
+        <title>Rock scroll dagger</title>
         <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
     </head>
     <body>
         <link rel="stylesheet" href="styles.css">
         <div id="container">
             <h1>Rock Scroll Dagger</h1>
-            <p id="intro-text">"The sun has just retreated and the cold November air begins covering the 
+            <p id="intro-text">The warm light has gone and the cold November air begins covering the 
                 woods with frost as you make your way back home. You feel the darkness creep upon you 
                 and the fireflies which once flew about close to you have disappeared. You feel a sudden chill
                 not caused by the cold but by the presence of someone ... or rather something ... close
                 by. And then you hear it.<br><br>
-                <i>'Are you leaving so soon?'</i> You realize this 'voice' is not being spoken to you rather
+                <i>'Are you leaving so soon?'</i> You realize this 'voice' is not speaking to you but rather
                 you hear it inside your head. <br><br>
                 <i>'How about this'</i> says the voice. <i>'If you beat me at the old tavern game of Rock Scroll Dagger,
-                I will let you leave. However, if you do not...well, let's not spoil the surprise shall we'.</i><br>
+                I will let you leave. However, if you do not... well, let's not spoil the surprise shall we'.</i><br>
                 <br>You weren't prepared for this. All your satchel holds is a peculiar looking stone, a scroll with 
-                illegible writing on it which you randomly found earlier and ah... yes... a dagger! Albeit, a 
-                dagger which requires sharpening."
+                illegible writing on it and ah... yes... a dagger! Albeit, a dagger which requires sharpening.
             </p>
             <p id="potion-text" class = "potion-offered">'Feeling faint you desperately search your satchel for something useful. 
                 Your hand finds a spherelike object swishing with fluid. You realize you have a health potion!'<br>
-                <br>It is up to you to decide whether to drink the potion or to continue fighting. 
+                <br>You must decide whether to drink the potion and hope it goes unnoticed or continue fighting. 
             </p>
-            <p id="healed-text">'In swift movement you pop the cork from the bottle and vigourosly consume the 
+            <p id="healed-text">'With one swift movement you pop the cork from the bottle and vigourosly consume the 
                 syrupy contents'.
             </p>
             <img id="enemy-eyes" src="./images/enemy-eyes.png">
             <p id="round-end-text"></p>
             <img id="divider" src="./images/divider.png">
             <p id="game-over-message"></p>
+            <button id="reset-btn">Re-try your adventure?</button>
             <div class="buttons-container">
                 <div class="buttons-heading"><p>What do you reach for?</p></div>
                 <div class = "game-button">
@@ -41,11 +41,11 @@
                         <img src="./images/crystal.png">
                         <img class="sparkle-overlay" src="./images/sparkle.gif">
                     </button>
-                    <button id="paper-btn" class="game-button">
+                    <button id="scroll-btn" class="game-button">
                         <img src="./images/scroll.png">
                         <img class="sparkle-overlay" src="./images/sparkle.gif">
                     </button>
-                    <button id="scissors-btn" class="game-button">
+                    <button id="dagger-btn" class="game-button">
                         <img src="./images/dagger.png">
                         <img class="sparkle-overlay" src="./images/sparkle.gif">
                     </button>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div id="health-container">
-                <p>Your health</p>
+                <p>HEALTH</p>
                 <div id="health-hearts"></div>
             </div>
         </div>

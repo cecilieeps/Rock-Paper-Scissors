@@ -1,7 +1,7 @@
 const container = document.getElementById('container');
 const rockBtn = document.getElementById('rock-btn');
-const paperBtn = document.getElementById('paper-btn');
-const scissorsBtn = document.getElementById('scissors-btn');
+const scrollBtn = document.getElementById('scroll-btn');
+const daggerBtn = document.getElementById('dagger-btn');
 const scoreContainer = document.getElementById('score-container');
 const healthContainer = document.getElementById('health-container');
 const healthPotionBtn = document.getElementById('health-potion-btn');
@@ -12,57 +12,49 @@ const healthHearts = document.getElementById('health-hearts');
 const gameOverMessage = document.getElementById('game-over-message');
 const enemyEyes = document.getElementById('enemy-eyes');
 const divider = document.getElementById('divider');
+const resetBtn = document.getElementById('reset-btn');
+const introText = document.getElementById('intro-text');
 
 potionText.style.visibility = 'hidden';
 healedText.style.visibility = 'hidden';
 enemyEyes.style.visibility = 'hidden';
 healthPotionBtn.style.display = 'none';
+resetBtn.style.visibility = 'hidden';
 
 let enemyLives = 5;
 let playerLives = 5;
 let gamesPlayed = 0;
 
-resetHealth();
+initializeHealth();
+
+resetBtn.addEventListener('click', () => {
+    document.location.reload();
+});
 
 healthPotionBtn.addEventListener('click', () => {
     document.getElementById('potion-text').style.opacity = 0.3;
     healedText.style.visibility = 'visible';
     healthPotionBtn.style.display = 'none';
-    resetHealth();
-    });
+    initializeHealth();
+});
 
 rockBtn.addEventListener('click', () => {
-    if (potionText.style.visibility === 'visible') {
-        potionText.style.opacity = 0.3;
-    }
-    if (healedText.style.visibility === 'visible') {
-        healedText.style.opacity = 0.3;
-    }
+    changeTextOpacityIfHealed();
     playRound('rock', getEnemyChoice());
-    });
+});
 
-paperBtn.addEventListener('click', () => {
-    if (potionText.style.visibility === 'visible') {
-        potionText.style.opacity = 0.3;
-    }
-    if (healedText.style.visibility === 'visible') {
-        healedText.style.opacity = 0.3;
-    }
-    playRound('paper', getEnemyChoice());
-    });
+scrollBtn.addEventListener('click', () => {
+   changeTextOpacityIfHealed();
+    playRound('scroll', getEnemyChoice());
+});
 
-scissorsBtn.addEventListener('click', () => {
-    if (potionText.style.visibility === 'visible') {
-        potionText.style.opacity = 0.3;
-    }
-    if (healedText.style.visibility === 'visible') {
-        healedText.style.opacity = 0.3;
-    }
-    playRound('scissors', getEnemyChoice());
-    });
+daggerBtn.addEventListener('click', () => {
+    changeTextOpacityIfHealed();
+    playRound('dagger', getEnemyChoice());
+});
 
 function getEnemyChoice() {
-    let choices = ['rock', 'paper', 'scissors'];
+    let choices = ['rock', 'scroll', 'dagger'];
     let i = Math.floor(Math.random() * 3);
     return choices[i];
 }
@@ -70,34 +62,34 @@ function getEnemyChoice() {
 function playRound(playerSelection, enemySelection) {
     switch (playerSelection) {
         case 'rock':
-            if (enemySelection === 'scissors'){
+            if (enemySelection === 'dagger'){
                 enemyLives--;
             }
-            if (enemySelection === 'paper') {
+            if (enemySelection === 'scroll') {
                 playerLives--;
                 removeHealth();
             }
             break;
-        case 'paper':
+        case 'scroll':
             if (enemySelection === 'rock'){
                 enemyLives--;
             }
-            if (enemySelection === 'scissors') {
+            if (enemySelection === 'dagger') {
                 playerLives--;
                 removeHealth();
             }
             break;
-        case 'scissors':
+        case 'dagger':
             if (enemySelection === 'rock'){
                 enemyLives--;
             }
-            if (enemySelection === 'scissors') {
+            if (enemySelection === 'dagger') {
                 playerLives--;
                 removeHealth();
             }
             break;
         default:
-            endOfRoundText.textContent=`It's a draw!`;
+            endOfRoundText.textContent='It\'s a draw!';
     }
     endOfRoundText.textContent=`The enemy uses ${enemySelection}!`;
     enemyEyes.style.visibility = 'visible';
@@ -108,7 +100,6 @@ function removeHealth() {
     if (healthHearts.hasChildNodes()) {
         healthHearts.removeChild(healthHearts.children[playerLives]);
     }
-    else {healthHearts.removeFirstChild();}
 }
 
 function checkLives() {
@@ -123,49 +114,52 @@ function checkLives() {
 }
 
 function offerHealthPotion() {
-    document.getElementById('intro-text').style.opacity = 0.3;
+    introText.style.opacity = 0.3;
     document.getElementById('potion-text').style.visibility = 'visible';
     healthPotionBtn.style.display = 'inline-block';
 }
 
+function changeTextOpacityIfHealed() {
+    if (potionText.style.visibility === 'visible') {
+        potionText.style.opacity = 0.3;
+    }
+    if (healedText.style.visibility === 'visible') {
+        healedText.style.opacity = 0.3;
+    }
+}
+
 function declareWinner(playerLives, enemyLives) {
-    document.querySelector('.buttons-heading').style.visibility = 'hidden';
     document.querySelector('.buttons-container').style.display = 'none';
     document.getElementById('health-container').style.display = 'none';
     endOfRoundText.style.visibility = 'hidden';
     enemyEyes.style.display = 'none';
     divider.style.display = 'none';
-    if (document.getElementById('intro-text').style.opacity === 1) {
-        document.getElementById('intro-text').style.opacity = 0.3;
-    }
+    introText.style.opacity = 0.3;
     if (playerLives > enemyLives) {
-        gameOverMessage.textContent = 'You win!';
+        gameOverMessage.textContent = 'You hear an angry growl and then a deafening screech. \
+                A sudden gust of wind throws your body across the forest floor. \
+                You fumble to your feet and run as fast as you can out of the forest.';
     } 
     else if (playerLives < enemyLives) {
-        gameOverMessage.textContent = 'Oh no ... something dark reaches from beyond the woods...';
+        gameOverMessage.textContent = 'Oh no ... something dark moves from behind the trees ...';
     } 
     else {
-        gameOverMessage.textContent = '\'Ahh... it appears we have a draw\'';
+        gameOverMessage.textContent = '\'Ah it appears we have a draw... how convenient.\'';
     }
+    resetBtn.style.visibility='visible';
 }
 
-// Resets global variables and health visuals
-function resetHealth() {
+// Initializes health visuals
+function initializeHealth() {
     enemyLives = 5;
-    playerLives = 5;
-    // Initializes health visuals
-    for (let i = 0; i < 5; i++) {
+    let numOfHearts = 5;
+    if (playerLives === 1) {
+        numOfHearts = 4;
+        playerLives = 5;
+    }
+    for (let i = 1; i <= numOfHearts; i++) {
         const heartIcon = document.createElement('img');
         heartIcon.setAttribute('src', './images/healthheart.png');
         healthHearts.appendChild(heartIcon);
     }
-}
-
-// When a game finishes all our text is visible on the screen
-// Re-set visibility and re-set player and enemy health
-function resetGame() {
-    resetHealth();
-    document.getElementById('intro-text').style.opacity = 1;
-    potionText.style.visibility = 'hidden';
-    document.querySelector('.buttons-heading').style.visibility = 'visible';
 }
