@@ -19,7 +19,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 button img {
@@ -46,9 +45,9 @@ button img {
 
 #container {
     font-family: 'Aclonica';
-    font-size: 14px;
+    font-size: 16px;
     color: whitesmoke;
-    margin: 10px auto;
+    margin: 40px auto;
     width: 900px;
     height: 900px;
     display: flex;
