@@ -65,7 +65,7 @@ function playRound(playerSelection, enemySelection) {
             if (enemySelection === 'dagger'){
                 enemyLives--;
             }
-            if (enemySelection === 'scroll') {
+            else if (enemySelection === 'scroll') {
                 playerLives--;
                 removeHealth();
             }
@@ -74,16 +74,16 @@ function playRound(playerSelection, enemySelection) {
             if (enemySelection === 'rock'){
                 enemyLives--;
             }
-            if (enemySelection === 'dagger') {
+            else if (enemySelection === 'dagger') {
                 playerLives--;
                 removeHealth();
             }
             break;
         case 'dagger':
-            if (enemySelection === 'rock'){
+            if (enemySelection === 'scroll'){
                 enemyLives--;
             }
-            if (enemySelection === 'dagger') {
+            else if (enemySelection === 'rock') {
                 playerLives--;
                 removeHealth();
             }
