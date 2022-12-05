@@ -60,6 +60,10 @@ function getEnemyChoice() {
 }
 
 function playRound(playerSelection, enemySelection) {
+    if (playerSelection === enemySelection) {
+        endOfRoundText.textContent='It\'s a draw!';
+    }
+    else {endOfRoundText.textContent=`The enemy uses ${enemySelection}!`;}
     switch (playerSelection) {
         case 'rock':
             if (enemySelection === 'dagger'){
@@ -89,10 +93,8 @@ function playRound(playerSelection, enemySelection) {
             }
             break;
         default:
-            endOfRoundText.textContent='It\'s a draw!';
     }
-    endOfRoundText.textContent=`The enemy uses ${enemySelection}!`;
-    enemyEyes.style.visibility = 'visible';
+    endOfRoundText.textContent;
     checkLives();
 }
 
